@@ -4,3 +4,5 @@
 # user login
 /authenticate.php
 /header.php
+## Mac system files
+/.DS_Store
