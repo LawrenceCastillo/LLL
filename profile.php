@@ -9,6 +9,7 @@ if (!isset($_SESSION['loggedin'])) {
 // Include config
 require_once "config.php";
 
+// Return main profile data, including type=null if quiz not submitted
 $stmt = $con->prepare('
     SELECT auth.email, det.phone_number, det.zipcode, det.looking_for, t.type, min(pairings.type_id2) type_pair1, max(pairings.type_id2) type_pair2
     FROM accounts auth
@@ -24,12 +25,27 @@ $stmt = $con->prepare('
   pairings ON pairings.type_id1=t.type_id
 WHERE auth.account_id = ?');
 
-// In this case we can use the account ID to get the account info.
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
 $stmt->bind_result($email, $phone_number, $zipcode, $looking_for, $type, $type_pair1, $type_pair2);
 $stmt->fetch();
 $stmt->close();
+
+// Return compatible type 1
+$stmt = $con->prepare('SELECT type FROM types WHERE type_id= ?');
+$stmt->bind_param('i', $type_pair1);
+$stmt->execute();
+$stmt->bind_result($pair1);
+$stmt->fetch();
+$stmt->close();
+// Return compatible type 2
+$stmt = $con->prepare('SELECT type FROM types WHERE type_id= ?');
+$stmt->bind_param('i', $type_pair2);
+$stmt->execute();
+$stmt->bind_result($pair2);
+$stmt->fetch();
+$stmt->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +93,10 @@ $stmt->close();
           <tr>
             <td>My Type:</td>
             <td><?=$type?></td>
+	  </tr>
+          <tr>
+            <td>My Compatible Types:</td>
+	    <td><?=$pair1?>, <?=$pair2?> </td>
           </tr>
         </table>
       </div>
