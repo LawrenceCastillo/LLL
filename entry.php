@@ -6,7 +6,6 @@ require_once "config.php";
 
 $id = $_SESSION['id'];
 
-echo $_POST['q2'];
 
 // Check which question was answered and which choice selected
 if ($_POST['q2'] == "Tend to Agree") {
