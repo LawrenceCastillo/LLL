@@ -97,5 +97,5 @@ if ($stmt = $con->prepare('INSERT INTO accounts_details (account_id, phone_numbe
 $stmt->close();
 
 $con->close();
-// header('Location: index.html');
+header('Location: index.html');
 ?>
