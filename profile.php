@@ -9,12 +9,27 @@ if (!isset($_SESSION['loggedin'])) {
 // Include config
 require_once "config.php";
 
-// We don't have the password or email info stored in sessions so instead we can get the results from the database.
-$stmt = $con->prepare('SELECT auth.email, det.phone_number, det.zipcode, det.looking_for, t.type FROM accounts auth JOIN accounts_details det ON auth.account_id=det.account_id JOIN (SELECT type_of.account_id account_id, types.type type FROM type_of JOIN types ON types.type_id=type_of.type_id) t ON t.account_id=auth.account_id WHERE auth.account_id = ?');
+$stmt = $con->prepare('
+SELECT auth.email, det.phone_number, det.zipcode, det.looking_for, t.type, min(pairings.type_id2) type_pair1, max(pairings.type_id2) type_pair2
+FROM accounts auth
+JOIN
+  accounts_details det ON auth.account_id=det.account_id
+LEFT JOIN
+  (SELECT type_of.account_id account_id, type_of.type_id, types.type type
+    FROM type_of
+    JOIN
+    types ON types.type_id=type_of.type_id) t
+  ON t.account_id=auth.account_id
+LEFT JOIN
+  pairings ON pairings.type_id1=t.type_id
+WHERE auth.account_id = ?');
+
+
+
 // In this case we can use the account ID to get the account info.
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($email, $phone_number, $zipcode, $looking_for, $type);
+$stmt->bind_result($email, $phone_number, $zipcode, $looking_for, $type, $type_pair1, $type_pair2);
 $stmt->fetch();
 $stmt->close();
 ?>
