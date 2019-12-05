@@ -17,7 +17,7 @@ foreach ($_POST as $key => $value) {
         echo "</td>";
         echo "</tr>";
     }
-
+/*
 // Check which question was answered and which choice selected
 if (!isset($_POST['q2'])){
   if ( $_POST['q2'] == "Tend to Agree" ){ $choice_id = 2*2; $count++; }
@@ -60,3 +60,4 @@ $stmt->close();
 
 $con->close();
 ?>
+ */

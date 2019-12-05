@@ -9,13 +9,25 @@ if (!isset($_SESSION['loggedin'])) {
 // Include config
 require_once "config.php";
 
-$stmt = $con->prepare('SELECT * FROM questions');
-// In this case we can use the account ID to get the account info.
-//$stmt->bind_param('i', $_SESSION['id']);
-$stmt->execute();
-$stmt->bind_result($question_id[][], $question[][]);
-$stmt->fetch();
-$stmt->close();
+/*
+function resultToArray($result) {
+  $rows = array();
+  while($row = $result->fetch_assoc()) {
+    $rows[] = $row;
+  }
+  return $rows;
+}
+
+$stmt = 'SELECT question FROM questions';
+$result = $con->query($stmt);
+$rows = resultToArray($result);
+ */
+
+$query = 'SELECT question FROM questions';
+$result = mysqli_fetch_all($con->query($query), MYSQLI_ASSOC);
+
+
+//$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -37,19 +49,16 @@ $stmt->close();
     <div class="content">
       <h2>Quiz</h2>
       <div>
-	      <form action="entry.php" method="post" autocomplete="off">
-          <p><?=$question[0][1]?></p>
-          <select name="q2" placeholder="Select" multiple >
-	          <option id="agree">Tend to Agree</option>
-	          <option id="disagree">Tend to Disagree</option>
-          <p><?=$question[1][1]?></p>
-          <select name="q3" placeholder="Select" multiple >
-	          <option id="agree">Tend to Agree</option>
-	          <option id="disagree">Tend to Disagree</option>
-          <p><?=$question[2][1]?></p>
-          <select name="q4" placeholder="Select" multiple >
-	          <option id="agree">Tend to Agree</option>
-	          <option id="disagree">Tend to Disagree</option>
+	<form action="entry.php" method="post" autocomplete="off"> 
+	  <?php for ( $i=0; $i < 8; $i++ ){ ?>
+            <blockquote>
+              <?php echo $result[$i]['question']; ?>
+              <select name="<?php echo $i+2 ?>"  >
+	        <option id="agree">Tend to Agree</option>
+	        <option id="disagree">Tend to Disagree</option>
+              </select>
+            </blockquote>
+          <?php } ?>
           <input type="submit" value="submit" >
         </form>
       </div>
