@@ -95,12 +95,15 @@ section.comments blockquote p.credit { font-size: .9em; margin-top: 0; line-heig
     text-align: center;
     font-size: 24px;
     color: #777480;
-    padding: 20px 0 20px 0;
+    padding: 20px 20px 20px 0;
     border-bottom: 1px solid #dee0e4;
 }
 form div input[type="text"], 
 form div input[type="password"],
-form div input[type="email"]{ 
+form div input[type="email"],
+form div input[type="phonenumber"],
+form div input[type="tel"],
+form div select[type="text"]{ 
     width: 80%;
     margin: 10px 10%;
     height: 50px;
@@ -111,9 +114,8 @@ form div input[type="email"]{
 form div input[type="submit"],
 form div input[type="register"]{
     width: 80%;
-    margin: 10px 10% 24px 10%;
-    height: 50px;
-    padding-left: 10px;
+    margin: 10px 24px 10% 10%;
+    height: 50px; 
     background-color: #9e0b0f;
     border: 0;
     cursor: pointer;

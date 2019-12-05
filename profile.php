@@ -22,21 +22,22 @@ $stmt->close();
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Profile Page</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LikeLikeLove.com</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/screen.css">
   </head>
-  <body class="loggedin">
-    <nav class="navtop">
-      <div>
-	<h1>Website Title</h1>
-	<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-	<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-      </div>
-    </nav>
-    <div class="content">
-      <h2>Profile Page</h2>
+
+  <body>
+    <div ="page">
+      <header>
+        <a id="top"></a>
+        <a class="logo" title="LikeLikeLove.com" href="profile.php"><span>LikeLikeLove.com</span></a>
+        <div class="hero">
+        </div>
+      </header>
+
+      <h2>Hey there, <?=$_SESSION['name']?>!</h2>
       <div>
 	<p>Your account details are below:</p>
 	<table>
@@ -66,6 +67,17 @@ $stmt->close();
           </tr>
         </table>
       </div>
+
+      <nav>
+        <ul>
+          <li><a class="navigation" href="logout.php">LOGOUT</a></li>
+          <li><a class="navigation" href="quiz.php">TAKE THE QUIZ!</a></li>
+          <li><a class="navigation" href="profile.php">PROFILE</a></li>
+	  <li><a class="navigation" href="index.html">LOGIN</a></li>
+	  <li><a class="navigation" href="register.html">REGISTER</a></li>
+        </ul>
+      </nav>
+
     </div>
   </body>
 </html>

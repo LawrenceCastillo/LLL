@@ -1,15 +1,25 @@
 <?php
-
 // Include config file
 require_once "config.php";
 
 // Now we check if the data was submitted, isset() function will check if the data exists.
-if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) {
+if (!isset(
+	$_POST['username'], 
+	$_POST['password'], 
+	$_POST['email'], 
+	$_POST['phonenumber'], 
+	$_POST['zipcode'], 
+	$_POST['lookingfor'])) {
   // Could not get the data that should have been sent.
   die ('Please complete the registration form!');
 }
 // Make sure the submitted registration values are not empty.
-if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+if (empty($_POST['username']) || 
+	empty($_POST['password']) || 
+	empty($_POST['email']) || 
+	empty($_POST['phonenumber']) || 
+	empty($_POST['zipcode']) || 
+	empty($_POST['lookingfor'])) {
   // One or more values are empty.
   die ('Please complete the registration form');
 }
@@ -28,6 +38,18 @@ if (preg_match('/[A-Za-z0-9]+/', $_POST['username']) == 0) {
 if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
   die ('Password must be between 5 and 20 characters long!');
 }
+
+// Check for valid email
+if (preg_match('/[0-9\-]+/', $_POST['phonenumber']) == 0) {
+  die ('Phone number is not valid!');
+}
+// Check for valid zipcode
+if (preg_match('/[0-9]+/', $_POST['zipcode']) == 0) {
+  die ('Zipcode is not valid!');
+}
+
+
+/* CREATE USER ACCOUNT */
 
 // We need to check if the account with that username exists.
 if ($stmt = $con->prepare('SELECT account_id, password FROM accounts WHERE username = ?')) {
@@ -57,6 +79,23 @@ if ($stmt = $con->prepare('SELECT account_id, password FROM accounts WHERE usern
   // Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
   echo 'Could not prepare statement!';
 }
+
+/* INPUT ADDITIONAL DETAILS */
+
+if ($stmt = $con->prepare('INSERT INTO accounts_details (account_id, phone_number, zipcode, looking_for) 
+	VALUES ((
+          SELECT account_id 
+          FROM accounts
+          WHERE username = ?), 
+          ?, ?, ?)')) {
+  $stmt->bind_param('ssss', $_POST['username'], $_POST['phonenumber'], $_POST['zipcode'], $_POST['lookingfor']);
+  $stmt->execute();
+  echo 'Entries successfully stored!';
+} else {
+  echo 'Could not prepare statement';
+}
+$stmt->close();
+
 $con->close();
-header('Location: index.html');
+// header('Location: index.html');
 ?>
