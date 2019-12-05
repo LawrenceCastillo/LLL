@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LikeLikeLove.com</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/screen.css">
   </head>
+
   <body>
-    <div class="login">
-      <h1>Login</h1>
-      <form action="authenticate.php" method="post">
-	<label for="username">
-	  <i class="fas fa-user"></i>
-	</label>
-	<input type="text" name="username" placeholder="Username" id="username" required>
-	<label for="password">
-	  <i class="fas fa-lock"></i>
-	</label>
-	<input type="password" name="password" placeholder="Password" id="password" required>
-        <input type="submit" value="Login">
+    <div id="page">
+      <header>
+        <a id="top"></a>
+        <a class="logo" title="LikeLikeLove.com" href="profile.php"><span>LikeLikeLove.com</span></a>
+        <div class="hero">
+        </div>
+      </header>
+      
+      <form class="login" action="authenticate.php" method="post">
+	<h1>Member Login</h1>
+	<div>
+	  <input type="text" name="username" placeholder="Username" id="username" required>
+	</div>
+	<div>
+	  <input type="password" name="password" placeholder="Password" id="password" required>
+	</div>
+	<div>
+	  <input type="submit" value="Login">
+	</div>
       </form>
+
+      <nav>
+        <ul>
+          <li><a class="navigation" href="logout.php">LOGOUT</a></li>
+          <li><a class="navigation" href="quiz.php">TAKE THE QUIZ!</a></li>
+          <li><a class="navigation" href="profile.php">PROFILE</a></li>
+	  <li><a class="navigation" href="index.html">LOGIN</a></li>
+	  <li><a class="navigation" href="register.html">REGISTER</a></li>
+        </ul>
+      </nav>
+
     </div>
   </body>
 </html>

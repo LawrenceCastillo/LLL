@@ -23,13 +23,13 @@ a.button:hover { background-color: rgba(0,0,0,.3); }
 
 /* Header */
 
-header { height: 670px; background: #faffff url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-550.jpg) no-repeat center bottom; position: relative; }
+header { height: 136px; background: #faffff url(../images/_MG_7838_.jpg) no-repeat center bottom; position: relative; }
 
 header a.logo { 
     z-index: 1;
     position: absolute; 
-    display: block; width: 78px; height: 78px;
-    background: url(../images/likelikelove_logo.gif) no-repeat 0 0; background-size: contain;
+    display: block; width: 108px; height: 108px;
+    background: url(../images/likelikelove-logo.png) no-repeat 0 0; background-size: contain;
     top: 20px; left: 20px;
 }
 header a.logo span { display: none; }
@@ -80,6 +80,49 @@ section.comments blockquote { width: 20%; margin: 2.5%; float: left; text-align:
 
 section.comments blockquote p.quote { font-style: italic; font-size: 1.2em; }
 section.comments blockquote p.credit { font-size: .9em; margin-top: 0; line-height: 1.3em; position: relative; }
+
+/* Login */
+
+.login {
+    width: 480px;
+    background-color: #ffffff;
+    box-shadow: 0 0 9px 0 rgba(40, 0, 120, 0.1);
+    margin: 100px auto;
+    width: 50%;
+    font-size: 16px;
+}
+.login h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #777480;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+form div input[type="text"], form div input[type="password"]{ 
+    width: 80%;
+    margin: 10px 10%;
+    height: 50px;
+    padding-left: 10px;
+    border: 1px solid #dee0e4;
+    font-size: 16px;
+}
+form div input[type="submit"] {
+    width: 80%;
+    margin: 10px 10%;
+    height: 50px;
+    padding-left: 10px;
+    background-color: #9e0b0f;
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+form div input[type="submit"]:hover {
+    background-color: #bb1515;
+    transition: background-color 0.2s;
+}
 
 /* Navigation */
 
@@ -156,7 +199,7 @@ footer a:hover { color: #000; } /* remove if not used */
     
     /* Header */
     
-    header { height: 550px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-435.jpg) no-repeat center bottom; position: relative; }
+    header { height: 136px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-435.jpg) no-repeat center bottom; position: relative; }
     
     header a.logo { width: 300px; height: 73px; }
     
@@ -194,7 +237,7 @@ footer a:hover { color: #000; } /* remove if not used */
     
     /* Header */
     
-    header { height: 476px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-366.jpg) no-repeat center bottom; position: relative; }
+    header { height: 136px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-366.jpg) no-repeat center bottom; position: relative; }
     
     header a.logo { width: 258px; height: 63px; }
     
@@ -237,7 +280,7 @@ footer a:hover { color: #000; } /* remove if not used */
     
     /* Header */
     
-    header { height: 800px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-690.jpg) no-repeat center bottom; position: relative; }
+    header { height: 136px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-690.jpg) no-repeat center bottom; position: relative; }
     
     header a.logo { width: 258px; height: 63px; }
     

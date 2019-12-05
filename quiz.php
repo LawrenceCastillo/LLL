@@ -9,25 +9,8 @@ if (!isset($_SESSION['loggedin'])) {
 // Include config
 require_once "config.php";
 
-/*
-function resultToArray($result) {
-  $rows = array();
-  while($row = $result->fetch_assoc()) {
-    $rows[] = $row;
-  }
-  return $rows;
-}
-
-$stmt = 'SELECT question FROM questions';
-$result = $con->query($stmt);
-$rows = resultToArray($result);
- */
-
 $query = 'SELECT question FROM questions';
 $result = mysqli_fetch_all($con->query($query), MYSQLI_ASSOC);
-
-
-//$stmt->close();
 ?>
 
 <!DOCTYPE html>
