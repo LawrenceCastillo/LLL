@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Register</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LikeLikeLove.com</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/screen.css">
   </head>
+  
   <body>
-    <div class="register">
-      <h1>Register</h1>
-      <form action="register.php" method="post" autocomplete="off">
-        <label for="username">
-	  <i class="fas fa-user"></i>
-        </label>
-        <input type="text" name="username" placeholder="Username" id="username" required>
-        <label for="password">
-          <i class="fas fa-lock"></i>
-	</label>
-        <input type="password" name="password" placeholder="Password" id="password" required>
-	<label for="email">
-	  <i class="fas fa-envelope"></i>
-	</label>
-	<input type="email" name="email" placeholder="Email" id="email" required>
-	<input type="submit" value="Register">
+    <div id="page">
+      <header>
+        <a id="top"></a>
+        <a class="logo" title="LikeLikeLove.com" href="profile.php"><span>LikeLikeLove.com</span></a>
+        <div class="hero">
+        </div>
+      </header>
+
+      <form class="login" action="register.php" method="post" autocomplete="off">
+	<h1>Member Registration</h1>
+        <div>
+          <input type="text" name="username" placeholder="Username" id="username" required>
+	</div>
+        <div>
+          <input type="password" name="password" placeholder="Password" id="password" required>
+	</div>
+	<div>
+	  <input type="email" name="email" placeholder="Email" id="email" required>
+	</div>
+	<div>
+	  <input type="submit" value="register">
+	</div>
       </form>
+
+      <nav>
+        <ul>
+          <li><a class="navigation" href="logout.php">LOGOUT</a></li>
+          <li><a class="navigation" href="quiz.php">TAKE THE QUIZ!</a></li>
+          <li><a class="navigation" href="profile.php">PROFILE</a></li>
+	  <li><a class="navigation" href="index.html">LOGIN</a></li>
+	  <li><a class="navigation" href="register.html">REGISTER</a></li>
+        </ul>
+      </nav>
+
     </div>
   </body>
 </html>

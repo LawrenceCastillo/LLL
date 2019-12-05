@@ -58,4 +58,5 @@ if ($stmt = $con->prepare('SELECT account_id, password FROM accounts WHERE usern
   echo 'Could not prepare statement!';
 }
 $con->close();
+header('Location: index.html');
 ?>
