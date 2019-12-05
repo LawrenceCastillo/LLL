@@ -37,51 +37,7 @@ header a.logo span { display: none; }
 header div.hero { position: absolute; width: 42%; top: 350px; left: 55%; }
 header div.hero h1 { line-height: 1.2em; margin: 0 0 20px 0; color: #faffff; }
 
-/* Section - All 
 
-section { padding: 0 30px; }
-section::after { content:''; display: block; clear: both; }
-
-/* Section - Main 
-
-section.main { margin-top: 20px; padding: 0; }
-section.main aside { width: 33.333%; float: left; text-align: center; }
-
-section.main .content { background-size: contain; }
-
-section.main .content img { display: block; max-width: 100%; height: auto; margin-bottom: 0; }
-
-/* section.about _ section.contact
-
-section.about { margin-top: 30px; background: url(../images/green-backdrop.jpg) no-repeat; padding-top: 30px; padding-bottom: 30px; color: #ddd; }
-
-section.about article { padding: 0 5px 0 5px; }
-
-section.about article div.contact { width: 32%; margin-right: 2%; float: left; text-align: right; }
-section.about article div.statement { width: 64%; margin-left: 2%; float: left; text-align: left; }
-
-/* section.services 
-
-section.services { margin-top: 20px; background-color: #F0F8FF; padding-top: 30px; padding-bottom: 30px; color: #777480; }
-
-section.services article { padding: 0 20px 0 280px; background: url(../images/icons/camera-icon-180.gif) no-repeat 0 5px; min-height: 250px; }
-
-section.services article div.package-one { padding: 5px 30px; color: #676470; background-color: #ddd; }
-section.services article div.package-two { padding: 5px 30px; color: #676470; background-color: #f5deb3; }
-section.services article div.prep { padding: 5px 30px; }
-
-/* Section - Comments
-
-section.comments { margin: 0; padding: 0; }
-
-section.comments article { margin-top: 20px; padding-top: 30px; text-align: center; }
-
-section.comments blockquote { width: 20%; margin: 2.5%; float: left; text-align: center; }
-
-section.comments blockquote p.quote { font-style: italic; font-size: 1.2em; }
-section.comments blockquote p.credit { font-size: .9em; margin-top: 0; line-height: 1.3em; position: relative; }
-
-*/
 #qpage {
     padding: 48px 0 36px 0;
 }
@@ -115,6 +71,18 @@ blockquote select[type="text"]{
     height: 50px;
     display: inline-block;
     position: absolute;
+}
+table tr {
+    width: 56%;
+    height: 24px;
+    margin: 12px 0 12px 0;
+    padding: 16px 4% 16px 4%;
+    font-size: 16px;
+    display: inline-block;
+    clear: both;
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0 0 9px 0 rgba(40, 0, 120, 0.1);
 }
 
 .login {

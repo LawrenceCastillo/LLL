@@ -10,21 +10,19 @@ if (!isset($_SESSION['loggedin'])) {
 require_once "config.php";
 
 $stmt = $con->prepare('
-SELECT auth.email, det.phone_number, det.zipcode, det.looking_for, t.type, min(pairings.type_id2) type_pair1, max(pairings.type_id2) type_pair2
-FROM accounts auth
-JOIN
-  accounts_details det ON auth.account_id=det.account_id
-LEFT JOIN
-  (SELECT type_of.account_id account_id, type_of.type_id, types.type type
-    FROM type_of
+    SELECT auth.email, det.phone_number, det.zipcode, det.looking_for, t.type, min(pairings.type_id2) type_pair1, max(pairings.type_id2) type_pair2
+    FROM accounts auth
     JOIN
-    types ON types.type_id=type_of.type_id) t
-  ON t.account_id=auth.account_id
-LEFT JOIN
+      accounts_details det ON auth.account_id=det.account_id
+    LEFT JOIN (
+      SELECT type_of.account_id account_id, type_of.type_id, types.type type
+      FROM type_of
+      JOIN
+        types ON types.type_id=type_of.type_id) t
+      ON t.account_id=auth.account_id
+    LEFT JOIN
   pairings ON pairings.type_id1=t.type_id
 WHERE auth.account_id = ?');
-
-
 
 // In this case we can use the account ID to get the account info.
 $stmt->bind_param('i', $_SESSION['id']);
@@ -44,7 +42,7 @@ $stmt->close();
   </head>
 
   <body>
-    <div ="page">
+    <div id="page">
       <header>
         <a id="top"></a>
         <a class="logo" title="LikeLikeLove.com" href="profile.php"><span>LikeLikeLove.com</span></a>
@@ -52,7 +50,7 @@ $stmt->close();
         </div>
       </header>
 
-      <h2>Hey there, <?=$_SESSION['name']?>!</h2>
+      <h2 id="qpage">Hey there, <?=$_SESSION['name']?>!</h2>
       <div>
 	<p>Your account details are below:</p>
 	<table>
