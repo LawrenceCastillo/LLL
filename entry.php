@@ -9,11 +9,11 @@ $id = $_SESSION['id'];
 echo $_POST['q2'];
 
 // Check which question was answered and which choice selected
-if ($_POST['q2'] == "agree") {
+if ($_POST['q2'] == "Tend to Agree") {
 	$choice_id = 2*2;
 	echo 'affirmative';
 }
-else if ($_POST['q2'] == "disagree") {
+else if ($_POST['q2'] == "Tend to Disagree") {
   $choice_id = 2*2+1;
 }
 
@@ -77,7 +77,7 @@ if ($stmt = $con->prepare('SELECT account_id, password FROM accounts WHERE usern
  */
 
 if ($stmt = $con->prepare('INSERT INTO chooses (account_id, choice_id) VALUES (?, ?)')) {
-  $stmt->bind_param($id, $choice_id);
+  $stmt->bind_param('ss', $id, $choice_id);
   $stmt->execute();
   echo 'Entries successfully stored!';
 } else {

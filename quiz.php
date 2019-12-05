@@ -39,10 +39,11 @@ $stmt->close();
       <h2>Quiz</h2>
       <div>
       <p><?=$question?></p>
-        <form action="entry.php" method="post" autocomplete="off">
-	  <button type="submit" name="q2" id="agree">Tend to Agree</button>
-	  <button type="submit" name="q2" id="disagree">Tend to Disagree</button>
-          <button type="submit" name="q2" id="skip">Skip</button>
+	<form action="entry.php" method="post" autocomplete="off">
+          <select name="q2" placeholder="Select" multiple >
+	    <option id="agree">Tend to Agree</option>
+	    <option id="disagree">Tend to Disagree</option>
+          <input type="submit" value="submit" >
         </form>
       </div>
     </div>
