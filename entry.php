@@ -46,5 +46,6 @@ if ($stmt = $con->prepare('
 $stmt->close();
 
 $con->close();
+header('Location: profile.php');
 ?>
 

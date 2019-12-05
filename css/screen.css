@@ -1,0 +1,361 @@
+/* CSS Document for Screens */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 300; color: #777480;
+    margin: 0; padding: 0; background: #faffff; }
+
+#page { max-width: 1200px; margin: 0 auto; position: relative; }
+
+/* Text */
+
+h1 { margin: 0 0 1em 0; font-size: 2.8em; font-weight: 300; color: #faffff; }
+h2 { margin: 0 0 .5em 0; font-size: 1.4em; font-weight: 500; line-height: 1.1em; }
+
+p { margin: 0 0 1em 0; }
+
+a { color: #007eff; }
+a:visited { color: #65b1ff}
+
+a.button { font-size: 1.2em; text-decoration: none; color: #faffff; border: 1px solid #faffff; padding: 4px 15px; 
+    transition: background-color .5s; }
+a.button:hover { background-color: rgba(0,0,0,.3); }
+
+/* Header */
+
+header { height: 136px; background: #faffff url(../images/_MG_7838_.jpg) no-repeat center bottom; position: relative; }
+
+header a.logo { 
+    z-index: 1;
+    position: absolute; 
+    display: block; width: 108px; height: 108px;
+    background: url(../images/likelikelove-logo.png) no-repeat 0 0; background-size: contain;
+    top: 20px; left: 20px;
+}
+header a.logo span { display: none; }
+
+header div.hero { position: absolute; width: 42%; top: 350px; left: 55%; }
+header div.hero h1 { line-height: 1.2em; margin: 0 0 20px 0; color: #faffff; }
+
+/* Section - All */
+
+section { padding: 0 30px; }
+section::after { content:''; display: block; clear: both; }
+
+/* Section - Main */
+
+section.main { margin-top: 20px; padding: 0; }
+section.main aside { width: 33.333%; float: left; text-align: center; }
+
+section.main .content { background-size: contain; }
+
+section.main .content img { display: block; max-width: 100%; height: auto; margin-bottom: 0; }
+
+/* section.about _ section.contact */
+
+section.about { margin-top: 30px; background: url(../images/green-backdrop.jpg) no-repeat; padding-top: 30px; padding-bottom: 30px; color: #ddd; }
+
+section.about article { padding: 0 5px 0 5px; }
+
+section.about article div.contact { width: 32%; margin-right: 2%; float: left; text-align: right; }
+section.about article div.statement { width: 64%; margin-left: 2%; float: left; text-align: left; }
+
+/* section.services */
+
+section.services { margin-top: 20px; background-color: #F0F8FF; padding-top: 30px; padding-bottom: 30px; color: #777480; }
+
+section.services article { padding: 0 20px 0 280px; background: url(../images/icons/camera-icon-180.gif) no-repeat 0 5px; min-height: 250px; }
+
+section.services article div.package-one { padding: 5px 30px; color: #676470; background-color: #ddd; }
+section.services article div.package-two { padding: 5px 30px; color: #676470; background-color: #f5deb3; }
+section.services article div.prep { padding: 5px 30px; }
+
+/* Section - Comments */
+
+section.comments { margin: 0; padding: 0; }
+
+section.comments article { margin-top: 20px; padding-top: 30px; text-align: center; }
+
+section.comments blockquote { width: 20%; margin: 2.5%; float: left; text-align: center; }
+
+section.comments blockquote p.quote { font-style: italic; font-size: 1.2em; }
+section.comments blockquote p.credit { font-size: .9em; margin-top: 0; line-height: 1.3em; position: relative; }
+
+/* Login */
+
+.login {
+    width: 480px;
+    background-color: #ffffff;
+    box-shadow: 0 0 9px 0 rgba(40, 0, 120, 0.1);
+    margin: 100px auto;
+    width: 50%;
+    font-size: 16px;
+}
+.login h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #777480;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+form div input[type="text"], form div input[type="password"]{ 
+    width: 80%;
+    margin: 10px 10%;
+    height: 50px;
+    padding-left: 10px;
+    border: 1px solid #dee0e4;
+    font-size: 16px;
+}
+form div input[type="submit"] {
+    width: 80%;
+    margin: 10px 10%;
+    height: 50px;
+    padding-left: 10px;
+    background-color: #9e0b0f;
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+form div input[type="submit"]:hover {
+    background-color: #bb1515;
+    transition: background-color 0.2s;
+}
+
+/* Navigation */
+
+nav { 
+    position: absolute;
+    top: 0px; left: 0px;
+    padding: 50px 0 0 0;
+    width: 100%;
+}
+
+nav::after { content:''; display: block; clear: both; }
+
+nav ul { list-style: none; margin: 0; padding: 0; }
+
+nav ul li a { 
+    display: inline-block;
+    text-align: center;
+    color: #777480;
+    padding: 10px 5px;
+    text-decoration: none;
+    width: 108px;
+    position: relative;
+}
+
+nav ul li a:visited { color: #777480; }
+nav ul li a:hover { color: #000; }
+
+/* top-level */
+
+nav > ul { padding-right: 20px; }
+
+nav > ul > li { float: right; }
+
+/* Footer */
+
+footer { font-size: .8em; margin: 40px; color: #999; }
+
+footer .content { display: inline; }
+
+footer a { margin-left: 30px; color: #777; }
+footer a:visited { color: #777; } /* remove if not used */
+footer a:hover { color: #000; } /* remove if not used */
+
+/* Media Queries */
+
+@media screen and (max-width: 1125px) {
+    
+    /* Text */
+    
+    h1 { font-size: 2.4em; }
+    
+    /* Header */
+    
+    header div.hero h1 { margin-bottom: 15px; }
+    
+    /* section - Main */
+
+    /* Section - About */
+    
+    /* Section - Services */
+    
+    /* Section - Comments */
+    
+    /* Navigation */
+    
+    /* Footer */
+}
+
+@media screen and (max-width: 950px) {
+    
+    /* Text */
+    
+    h1 { font-size: 2.0em; }
+    
+    /* Header */
+    
+    header { height: 136px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-435.jpg) no-repeat center bottom; position: relative; }
+    
+    header a.logo { width: 300px; height: 73px; }
+    
+    header div.hero { top: 305px; }
+    header div.hero h1 { margin-bottom: 10px; }
+    
+    /* section - Main */
+    
+    /* Section - About */
+
+    section.about article { padding: 0 20px 0 30px; }
+
+    section.about article div.contact { width: 95%; margin: 2.5%; float: left; text-align: center; }
+    section.about article div.statement { width: 95%; margin-left: 2.5%; float: left; text-align: left; }
+
+    /* Section - Services */
+    
+    /* Section - Comments */
+    
+    /* Navigation */
+    
+    nav { padding: 45px 0 0 0; }
+    
+    nav ul li a { width: 125px; }
+        
+    /* Footer */
+}
+
+@media screen and (max-width: 800px) {
+    
+    /* Text */
+    
+    h1 { font-size: 1.6em; }
+    a.button { font-size: 1em; }
+    
+    /* Header */
+    
+    header { height: 136px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-366.jpg) no-repeat center bottom; position: relative; }
+    
+    header a.logo { width: 258px; height: 63px; }
+    
+    header div.hero { top: 280px; left: 50%; }
+    header div.hero h1 { margin-bottom: 10px; }
+    
+    /* section - Main */
+    
+    section.main aside { width: 50%; }
+
+    /* Section - About */
+    
+    section.about article { padding: 0; }
+    
+    /* Section - Services */
+    
+    section.services article { padding: 200px 0 0 0; background-size: 300px auto; min-height: initial; }
+    
+    /* Section - Comments */
+    
+    section.comments blockquote p.quote { font-size: .9em; }
+    section.comments blockquote p.credit { font-size: .9em; }
+    
+    /* Navigation */
+    
+    nav { padding: 40px 0 0 0; }
+    
+    nav ul li a { width: 100px; }
+    
+    /* Footer */
+
+}
+
+@media screen and (max-width: 645px) {
+    
+    /* Text */
+    
+    h1 { font-size: 2em; }
+    a.button { font-size: 1.2em; }
+    
+    /* Header */
+    
+    header { height: 136px; background: url(../images/banner/lawrence-gabriel-castillo-headshots-nyc-actress-brianne-berriman-690.jpg) no-repeat center bottom; position: relative; }
+    
+    header a.logo { width: 258px; height: 63px; }
+    
+    header div.hero { top: 350px; left: 45%; }
+    header div.hero h1 { margin-bottom: 10px; }
+    
+    /* section - Main */
+    
+    section.main aside { width: 100%; margin-bottom: 20px; }
+    section.main .content img { margin-left: auto; margin-right: auto; }
+
+    /* Section - About */
+    
+    /* Section - Services */
+    
+    /* Section - Comments */
+    
+    
+    section.comments blockquote { width: 100%; margin-left: auto; margin-right: auto; text-align: center; }
+    
+    section.comments blockquote p.quote { font-size: 1em; margin: 20px; }
+    section.comments blockquote p.credit { font-size: 1em; }
+    
+    /* Navigation */
+    
+    nav { margin: 30px; padding: 73px 0 0 0; }
+    
+    nav ul li { width: 33.33%; }
+    nav ul li a { width: auto; text-align: center; color: #ffffff; }
+    
+    nav ul li a:visited { color: #ffffff; }
+    nav ul li a:hover { color: #faffff; }
+    
+    /* Footer */
+    
+}
+
+@media screen and (max-width: 504px) {
+    
+    /* Text */
+    
+    h1 { font-size: 1.8em; }
+    a.button { font-size: .9em; }
+    
+    /* Header */
+    
+    header div.hero { top: 320px; left: 40%; }
+    
+    /* section - Main */
+    
+    section.main aside { width: 100%; margin-bottom: 20px; }
+    section.main .content img { margin-left: auto; margin-right: auto; }
+
+    /* Section - About */
+    
+    /* Section - Services */
+    
+    /* Section - Comments */
+    
+    
+    section.comments blockquote { width: 100%; margin-left: auto; margin-right: auto; text-align: center; }
+    
+    section.comments blockquote p.quote { font-size: 1em; margin: 20px; }
+    section.comments blockquote p.credit { font-size: 1em; }
+    
+    /* Navigation */
+    
+    nav { margin-top: 30px; margin-left: auto; margin-right: auto; padding: 73px 0 0 0; }
+    
+    nav ul li { width: 33.33%; text-align: center; }
+    nav ul li a { width: auto; color: #ffffff; }
+    
+    nav ul li a:visited { color: #ffffff; }
+    nav ul li a:hover { color: #faffff; }
+    
+    /* Footer */
+    
+}
