@@ -46,6 +46,33 @@ $stmt->bind_result($pair2);
 $stmt->fetch();
 $stmt->close();
 
+// Return unique match 
+$stmt = $con->prepare('SELECT account_id1, account_id2 FROM creates WHERE account_id1= ? OR account_id2= ?');
+$stmt->bind_param('ii', $_SESSION['id'], $_SESSION['id']);
+$stmt->execute();
+$stmt->bind_result($match1, $match2);
+$stmt->fetch();
+$stmt->close();
+
+if ($match1 == $_SESSION['id']){ $match = $match2;}
+else {$match = $match1;}
+
+// Get match identity
+$stmt = $con->prepare('
+    SELECT p.username, p.email, d.phone_number, t.type
+    FROM accounts p
+    JOIN accounts_details d ON d.account_id = p.account_id
+    JOIN types t ON t.type_id = (
+      SELECT type_id 
+      FROM type_of
+      WHERE account_id = ? )
+    WHERE p.account_id = ?');
+$stmt->bind_param('ii', $match, $match);
+$stmt->execute();
+$stmt->bind_result($m_name, $m_email, $m_phone, $m_type);
+$stmt->fetch();
+$stmt->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -90,13 +117,27 @@ $stmt->close();
             <td>Looking For:</td>
             <td><?=$looking_for?></td>
 	  </tr>
+        </table>
+        <table>
           <tr>
             <td>My Type:</td>
             <td><?=$type?></td>
 	  </tr>
           <tr>
             <td>My Compatible Types:</td>
-	    <td><?=$pair1?>, <?=$pair2?> </td>
+	    <td><?=$pair1?>, <?=$pair2?></td>
+	  </tr>
+          <tr id="match">
+	    <td>My Match: <?=$m_name?></td>
+          </tr>
+          <tr id="match">
+	    <td>Email: <?=$m_email?></td>
+          </tr>
+          <tr id="match">
+	    <td>Phone: <?=$m_phone?></td>
+          </tr>
+          <tr id="match">
+            <td>Type: <?=$m_type?></td>
           </tr>
         </table>
       </div>

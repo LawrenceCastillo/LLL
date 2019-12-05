@@ -72,19 +72,26 @@ blockquote select[type="text"]{
     display: inline-block;
     position: absolute;
 }
-table tr {
-    width: 56%;
-    height: 24px;
-    margin: 12px 0 12px 0;
-    padding: 16px 4% 16px 4%;
-    font-size: 16px;
+table { 
+    width: 44%;
+    padding: 8px 2% 8px 2%;    
     display: inline-block;
     clear: both;
     position: relative;
+}
+table tr {
+    width: 400px;
+    height: 50px;
+    margin: 12px 0 12px 0;
+    font-size: 16px;
+    display: block;
     background-color: #ffffff;
     box-shadow: 0 0 9px 0 rgba(40, 0, 120, 0.1);
 }
-
+#match {
+    background-color: #950b0f;
+    color: #ffffff;
+}
 .login {
     width: 480px;
     background-color: #ffffff;
@@ -165,7 +172,7 @@ nav > ul > li { float: right; }
 
 /* Footer */
 
-footer { font-size: .8em; margin: 40px; color: #999; }
+footer { font-size: .8em; position: fixed; bottom: 0px; margin: 40px; color: #999; }
 
 footer .content { display: inline; }
 
