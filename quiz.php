@@ -53,7 +53,7 @@ $result = mysqli_fetch_all($con->query($query), MYSQLI_ASSOC);
 	  <?php for ( $i=0; $i < 8; $i++ ){ ?>
             <blockquote>
               <?php echo $result[$i]['question']; ?>
-              <select name="<?php echo $i+2 ?>"  >
+              <select name="<?php echo $i+1 ?>"  >
 	        <option id="agree">Tend to Agree</option>
 	        <option id="disagree">Tend to Disagree</option>
               </select>
