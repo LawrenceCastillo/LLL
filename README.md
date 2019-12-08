@@ -3,14 +3,14 @@ matchmaking application
 (for educational purposes)
 
 Application Stack (LAMP)
-CSS
-HTML
-PHP
-MySQLi
-MariaDB
-Apache
-Raspbian
-Raspberry Pi
+CSS<br>
+HTML<br>
+PHP<br>
+MySQLi<br>
+MariaDB<br>
+Apache<br>
+Raspbian<br>
+Raspberry Pi<br>
 
 The original iteration of this app ran on a Pi 4; with static IP 
 and port forwarding, I deployed it over the web for a brief period 

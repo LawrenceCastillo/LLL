@@ -16,16 +16,19 @@ $stmt = $con->prepare('
     JOIN
       accounts_details det ON auth.account_id=det.account_id
     LEFT JOIN (
-      SELECT type_of.account_id account_id, type_of.type_id, types.type type
+      SELECT type_of.account_id, type_of.type_id, type_of.type_of_id, types.type
       FROM type_of
       JOIN
-        types ON types.type_id=type_of.type_id) t
-      ON t.account_id=auth.account_id
+        types ON types.type_id=type_of.type_id
+      WHERE type_of.account_id=?
+      ORDER BY type_of.type_of_id DESC
+      LIMIT 1) t
+    ON t.account_id=auth.account_id
     LEFT JOIN
   pairings ON pairings.type_id1=t.type_id
 WHERE auth.account_id = ?');
 
-$stmt->bind_param('i', $_SESSION['id']);
+$stmt->bind_param('ii', $_SESSION['id'], $_SESSION['id']);
 $stmt->execute();
 $stmt->bind_result($email, $phone_number, $zipcode, $looking_for, $type, $type_pair1, $type_pair2);
 $stmt->fetch();
@@ -45,6 +48,8 @@ $stmt->execute();
 $stmt->bind_result($pair2);
 $stmt->fetch();
 $stmt->close();
+
+
 
 // Return unique match 
 $stmt = $con->prepare('SELECT account_id1, account_id2 FROM creates WHERE account_id1= ? OR account_id2= ?');
