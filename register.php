@@ -8,7 +8,8 @@ if (!isset(
 	$_POST['password'], 
 	$_POST['email'], 
 	$_POST['phonenumber'], 
-	$_POST['zipcode'], 
+	$_POST['zipcode'],
+        $_POST['gender'],	
 	$_POST['lookingfor'])) {
   // Could not get the data that should have been sent.
   die ('Please complete the registration form!');
@@ -19,35 +20,32 @@ if (empty($_POST['username']) ||
 	empty($_POST['email']) || 
 	empty($_POST['phonenumber']) || 
 	empty($_POST['zipcode']) || 
+	empty($_POST['gender']) ||
 	empty($_POST['lookingfor'])) {
   // One or more values are empty.
   die ('Please complete the registration form');
 }
 
 // Check for valid email
-if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {  
   die ('Email is not valid!');
 }
-
 // Check for valid username
 if (preg_match('/[A-Za-z0-9]+/', $_POST['username']) == 0) {
   die ('Username is not valid!');
 }
-
 // Check valid char length
 if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
   die ('Password must be between 5 and 20 characters long!');
 }
-
 // Check for valid email
-if (preg_match('/[0-9\-]+/', $_POST['phonenumber']) == 0) {
+if (preg_match('/[0-9\-]+/', $_POST['phonenumber']) == 0) {      
   die ('Phone number is not valid!');
 }
 // Check for valid zipcode
-if (preg_match('/[0-9]+/', $_POST['zipcode']) == 0) {
+if (preg_match('/[0-9]+/', $_POST['zipcode']) == 0) {   
   die ('Zipcode is not valid!');
 }
-
 
 /* CREATE USER ACCOUNT */
 
@@ -82,13 +80,20 @@ if ($stmt = $con->prepare('SELECT account_id, password FROM accounts WHERE usern
 
 /* INPUT ADDITIONAL DETAILS */
 
-if ($stmt = $con->prepare('INSERT INTO accounts_details (account_id, phone_number, zipcode, looking_for) 
+// data formatting
+if ($_POST['gender'] == 'I am a female') {$gender = 'female';}
+else {$gender = 'male';}
+
+if ($_POST['lookingfor'] == 'Looking for a female') {$lookingfor = 'female';}
+else {$lookingfor = 'male';}
+
+if ($stmt = $con->prepare('INSERT INTO accounts_details (account_id, phone_number, zipcode, looking_for, gender) 
 	VALUES ((
           SELECT account_id 
           FROM accounts
           WHERE username = ?), 
-          ?, ?, ?)')) {
-  $stmt->bind_param('ssss', $_POST['username'], $_POST['phonenumber'], $_POST['zipcode'], $_POST['lookingfor']);
+          ?, ?, ?, ?)')) {
+  $stmt->bind_param('sssss', $_POST['username'], $_POST['phonenumber'], $_POST['zipcode'], $lookingfor, $gender);
   $stmt->execute();
   echo 'Entries successfully stored!';
 } else {
