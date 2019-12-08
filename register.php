@@ -81,13 +81,11 @@ if ($stmt = $con->prepare('SELECT account_id, password FROM accounts WHERE usern
 /* INPUT ADDITIONAL DETAILS */
 
 // data formatting
-//if ($_POST['gender'] == 'I am a female') {$gender = 'female';}
-//else {$gender = 'male';}
+if ($_POST['gender'] == 'I am a female') {$gender = 'female';}
+else {$gender = 'male';}
 
-//if ($_POST['lookingfor'] == 'Looking for a female') {$lookingfor = 'female';}
-//else {$lookingfor = 'male';}
-
-echo $gender $lookingfor;
+if ($_POST['lookingfor'] == 'Looking for a female') {$lookingfor = 'female';}
+else {$lookingfor = 'male';}
 
 if ($stmt = $con->prepare('INSERT INTO accounts_details (account_id, phone_number, zipcode, looking_for, gender) 
 	VALUES ((
@@ -104,5 +102,5 @@ if ($stmt = $con->prepare('INSERT INTO accounts_details (account_id, phone_numbe
 $stmt->close();
 
 $con->close();
-//header('Location: index.html');
+header('Location: index.html');
 ?>
