@@ -2,7 +2,7 @@
 matchmaking application
 (for educational purposes)
 
-Application Stack (LAMP)
+Application Stack (LAMP)<br>
 CSS<br>
 HTML<br>
 PHP<br>
