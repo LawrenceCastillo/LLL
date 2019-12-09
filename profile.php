@@ -9,6 +9,8 @@ if (!isset($_SESSION['loggedin'])) {
 // Include config
 require_once "config.php";
 
+$id = $_SESSION['id'];
+
 // Return main profile data, including type=null if quiz not submitted
 $stmt = $con->prepare('
     SELECT auth.email, det.phone_number, det.zipcode, det.gender, det.looking_for, t.type, min(pairings.type_id2) type_pair1, max(pairings.type_id2) type_pair2
@@ -49,38 +51,106 @@ $stmt->bind_result($pair2);
 $stmt->fetch();
 $stmt->close();
 
+// create new match if match does not exist within last 24 hours
+$stmt = $con->prepare('
+    SELECT a.account_id
+    FROM accounts a
+    JOIN (
+      SELECT g.*
+      FROM type_of ty
+      JOIN (
+        SELECT *
+        FROM `accounts_details`
+        WHERE gender= ? AND looking_for = (
+          SELECT gender
+          FROM accounts_details
+          WHERE account_id= ?)
+      ) g
+      ON ty.account_id=g.account_id
+      WHERE (ty.type_id= ? OR ty.type_id= ?)
+      AND g.account_id NOT IN (
+        SELECT account_id1
+        FROM creates
+        WHERE paired > DATE_SUB(NOW(), INTERVAL 24 HOUR)
+        UNION
+        SELECT account_id2
+        FROM creates
+        WHERE paired > DATE_SUB(NOW(), INTERVAL 24 HOUR))
+      ) val
+    ON a.account_id = val.account_id
+    ORDER BY created ASC
+    LIMIT 1
+    ');
+$stmt->bind_param('siii', $gender,$id, $type_pair1, $type_pair2);
+$stmt->execute();
+$stmt->bind_result($new_match);
+$stmt->fetch();
+$stmt->close();
 
+// check if user created a match within last 24 horus
+$stmt = $con->prepare('
+    SELECT account_id
+    FROM accounts
+    WHERE account_id = ? AND account_id IN (
+      SELECT account_id1
+      FROM creates
+      WHERE paired > DATE_SUB(NOW(), INTERVAL 24 HOUR)
+      UNION
+      SELECT account_id2
+      FROM creates
+      WHERE paired > DATE_SUB(NOW(), INTERVAL 24 HOUR))');
+$stmt->bind_param('i', $id);
+$stmt->execute();
+$stmt->bind_result($ready_for_match);
+$stmt->fetch();
+$stmt->close();
+
+if ($new_match == NULL || $ready_for_match > 0) { ;}
+else {
+  $stmt = $con->prepare('
+      INSERT INTO creates (account_id1, account_id2) VALUES (?, ?)');
+  $stmt->bind_param('ii', $id, $new_match);
+  $stmt->execute();
+  $stmt->close();
+}
 
 // Return unique match 
 $stmt = $con->prepare('
     SELECT account_id1, account_id2 
     FROM creates 
-    WHERE (account_id1= ? OR account_id2= ?)
-    AND paired >= now() + INTERVAL 1 DAY');
+    WHERE
+      (account_id1=? AND paired > DATE_SUB(NOW(), INTERVAL 24 HOUR)) OR
+      (account_id2=? AND paired > DATE_SUB(NOW(), INTERVAL 24 HOUR))
+   ORDER BY paired DESC
+   LIMIT 1');
 $stmt->bind_param('ii', $_SESSION['id'], $_SESSION['id']);
 $stmt->execute();
 $stmt->bind_result($match1, $match2);
 $stmt->fetch();
 $stmt->close();
 
-if ($match1 == $_SESSION['id']){ $match = $match2;}
-else {$match = $match1;}
+if ($match1 == $id || $match2 == $id){
+  if ($match1 == $id) {$match = $match2;}
+  else {$match = $match1;}
 
-// Get match identity
-$stmt = $con->prepare('
-    SELECT p.username, p.email, d.phone_number, t.type
-    FROM accounts p
-    JOIN accounts_details d ON d.account_id = p.account_id
-    JOIN types t ON t.type_id = (
-      SELECT type_id 
-      FROM type_of
-      WHERE account_id = ? )
-    WHERE p.account_id = ?');
-$stmt->bind_param('ii', $match, $match);
-$stmt->execute();
-$stmt->bind_result($m_name, $m_email, $m_phone, $m_type);
-$stmt->fetch();
-$stmt->close();
+  // Get match identity
+  $stmt = $con->prepare('
+      SELECT p.username, p.email, d.phone_number, t.type
+      FROM accounts p
+      JOIN accounts_details d ON d.account_id = p.account_id
+      JOIN types t ON t.type_id = (
+        SELECT type_id 
+        FROM type_of
+        WHERE account_id = ? )
+      WHERE p.account_id = ?');
+  $stmt->bind_param('ii', $match, $match);
+  $stmt->execute();
+  $stmt->bind_result($m_name, $m_email, $m_phone, $m_type);
+  $stmt->fetch();
+  $stmt->close();
+}
+else if ($new_match == NULL) {$m_name = "Waiting for match...";}
+else {$m_name = "Take quiz to generate new match!";}
 
 ?>
 
