@@ -1,3 +1,18 @@
+<?php
+// We need to use sessions, so you should always start sessions using the below code.
+session_start();
+// If the user is not logged in redirect to the login page...
+if (!isset($_SESSION['loggedin'])) {
+  header('Location: index.html');
+  exit();
+}
+// Include config
+require_once "config.php";
+
+$query = 'SELECT type, description FROM types';
+$result = mysqli_fetch_all($con->query($query), MYSQLI_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -8,7 +23,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/screen.css">
   </head>
 
-  <body>
+  <body> 
     <div id="page">
       <header>
         <a id="top"></a>
@@ -16,19 +31,15 @@
         <div class="hero">
         </div>
       </header>
-      
-      <form class="login" action="authenticate.php" method="post">
-	<h1>Member Login</h1>
-	<div>
-	  <input type="text" name="username" placeholder="Username" id="username" required>
-	</div>
-	<div>
-	  <input type="password" name="password" placeholder="Password" id="password" required>
-	</div>
-	<div>
-	  <input type="submit" value="Login">
-	</div>
-      </form>
+
+      <h2 id="qpage">Personality Types based on "The Four Tendencies" by Gretchen Rubin</h2>
+      <div>
+	<?php for ( $i=0; $i < 4; $i++ ){ ?>
+          <blockquote><b>
+	    <?php echo $result[$i]['type'];?>: </b><?php echo $result[$i]['description']; ?>
+          </blockquote>
+        <?php } ?>
+      </div>
 
       <nav>
         <ul>
@@ -41,7 +52,7 @@
       </nav>
 
      <footer>
-       This website was created for educational purposes only.<br>
+       This website was created for educational purposes only. No harm intended to the author of the book.<br>
        &copy; Lawrence Gabriel Castillo: New York- Based Software Engineer
        <!--This website created by Lawrence Gabriel Castillo-->
      </footer>

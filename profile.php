@@ -204,7 +204,7 @@ else {$m_name = "Take quiz to generate new match!";}
         <table>
           <tr>
             <td>My Type:</td>
-            <td><?=$type?></td>
+            <td><?=$type?> <a href="types.php">[view description]</td>
 	  </tr>
           <tr>
             <td>My Compatible Types:</td>
