@@ -116,7 +116,7 @@ else {
 
 // Return unique match 
 $stmt = $con->prepare('
-    SELECT account_id1, account_id2 
+    SELECT account_id1, account_id2, DATE_SUB(TIMEDIFF(NOW(),paired),INTERVAL 24 HOUR) as expire 
     FROM creates 
     WHERE
       (account_id1=? AND paired > DATE_SUB(NOW(), INTERVAL 24 HOUR)) OR
@@ -125,7 +125,7 @@ $stmt = $con->prepare('
    LIMIT 1');
 $stmt->bind_param('ii', $_SESSION['id'], $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($match1, $match2);
+$stmt->bind_result($match1, $match2, $m_expire);
 $stmt->fetch();
 $stmt->close();
 
@@ -149,8 +149,8 @@ if ($match1 == $id || $match2 == $id){
   $stmt->fetch();
   $stmt->close();
 }
-else if ($new_match == NULL) {$m_name = "Waiting for match...";}
-else {$m_name = "Take quiz to generate new match!";}
+else if ($type == NULL) {$m_name = "Take the quiz to find your type!";}
+else {$m_name = "Waiting for your match...";}
 
 ?>
 
@@ -200,12 +200,12 @@ else {$m_name = "Take quiz to generate new match!";}
             <td>Looking for a:</td>
             <td><?=$looking_for?></td>
 	  </tr>
-        </table>
-        <table>
           <tr>
             <td>My Type:</td>
             <td><?=$type?> <a href="types.php">[view description]</td>
 	  </tr>
+        </table>
+        <table>
           <tr>
             <td>My Compatible Types:</td>
 	    <td><?=$pair1?>, <?=$pair2?></td>
@@ -221,6 +221,9 @@ else {$m_name = "Take quiz to generate new match!";}
           </tr>
           <tr id="match">
             <td>Type: <?=$m_type?></td>
+	  </tr>
+          <tr>
+            <td>Match Expires: <?=$m_expire?></td>
           </tr>
         </table>
       </div>
