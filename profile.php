@@ -87,7 +87,8 @@ $stmt->bind_result($new_match);
 $stmt->fetch();
 $stmt->close();
 
-$stmt = con->prepare('
+// check if user created a match within last 24 horus
+$stmt = $con->prepare('
     SELECT account_id
     FROM accounts
     WHERE account_id = ? AND account_id IN (
@@ -106,7 +107,7 @@ $stmt->close();
 
 if (!($new_match > 0) || $ready_for_match > 0) {;}
 else {
-  $stmt = con->prepare('
+  $stmt = $con->prepare('
       INSERT INTO creates (accountd_id1, account_id2) VALUES (?, ?)');
   $stmt->bind_params('ii', $id, $new_match);
   $stmt->execute();
