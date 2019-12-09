@@ -51,6 +51,68 @@ $stmt->bind_result($pair2);
 $stmt->fetch();
 $stmt->close();
 
+// create new match if match does not exist within last 24 hours
+$stmt = $con->prepare('
+    SELECT a.account_id
+    FROM accounts a
+    JOIN (
+      SELECT g.*
+      FROM type_of ty
+      JOIN (
+        SELECT *
+        FROM `accounts_details`
+        WHERE gender="female" AND looking_for = (
+          SELECT gender
+          FROM accounts_details
+          WHERE account_id= ?)
+      ) g
+      ON ty.account_id=g.account_id
+      WHERE (ty.type_id= ? OR ty.type_id= ?)
+      AND g.account_id NOT IN (
+        SELECT account_id1
+        FROM creates
+        WHERE paired > DATE_SUB(NOW(), INTERVAL 24 HOUR)
+        UNION
+        SELECT account_id2
+        FROM creates
+        WHERE paired > DATE_SUB(NOW(), INTERVAL 24 HOUR))
+      ) val
+    ON a.account_id = val.account_id
+    ORDER BY created ASC
+    LIMIT 1
+    ');
+$stmt->bind_param('iii', $id, $type_pair1, $type_pair2);
+$stmt->execute();
+$stmt->bind_result($new_match);
+$stmt->fetch();
+$stmt->close();
+
+$stmt = con->prepare('
+    SELECT account_id
+    FROM accounts
+    WHERE account_id = ? AND account_id IN (
+      SELECT account_id1
+      FROM creates
+      WHERE paired > DATE_SUB(NOW(), INTERVAL 24 HOUR)
+      UNION
+      SELECT account_id2
+      FROM creates
+      WHERE paired > DATE_SUB(NOW(), INTERVAL 24 HOUR))');
+$stmt->bind_param('i', $id);
+$stmt->execute();
+$stmt->bind_result($ready_for_match);
+$stmt->fetch();
+$stmt->close();
+
+if (!($new_match > 0) || $ready_for_match > 0) {;}
+else {
+  $stmt = con->prepare('
+      INSERT INTO creates (accountd_id1, account_id2) VALUES (?, ?)');
+  $stmt->bind_params('ii', $id, $new_match);
+  $stmt->execute();
+  $stmt->close();
+}
+
 // Return unique match 
 $stmt = $con->prepare('
     SELECT account_id1, account_id2 
