@@ -81,7 +81,7 @@ $stmt = $con->prepare('
     ORDER BY created ASC
     LIMIT 1
     ');
-$stmt->bind_param('siii', $gender,$id, $type_pair1, $type_pair2);
+$stmt->bind_param('siii', $looking_for, $id, $type_pair1, $type_pair2);
 $stmt->execute();
 $stmt->bind_result($new_match);
 $stmt->fetch();
@@ -105,7 +105,7 @@ $stmt->bind_result($ready_for_match);
 $stmt->fetch();
 $stmt->close();
 
-if ($new_match == NULL || $ready_for_match > 0) { ;}
+if ($new_match == NULL || $ready_for_match != NULL) { ;}
 else {
   $stmt = $con->prepare('
       INSERT INTO creates (account_id1, account_id2) VALUES (?, ?)');
@@ -223,7 +223,7 @@ else {$m_name = "Waiting for your match...";}
             <td>Type: <?=$m_type?></td>
 	  </tr>
           <tr>
-            <td>Match Expires: <?=$m_expire?></td>
+            <td>Match Expires: <?=$m_expire?> hours</td>
           </tr>
         </table>
       </div>
