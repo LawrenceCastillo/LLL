@@ -61,7 +61,7 @@ $stmt = $con->prepare('
       JOIN (
         SELECT *
         FROM `accounts_details`
-        WHERE gender="female" AND looking_for = (
+        WHERE gender= ? AND looking_for = (
           SELECT gender
           FROM accounts_details
           WHERE account_id= ?)
@@ -81,7 +81,7 @@ $stmt = $con->prepare('
     ORDER BY created ASC
     LIMIT 1
     ');
-$stmt->bind_param('iii', $id, $type_pair1, $type_pair2);
+$stmt->bind_param('siii', $gender,$id, $type_pair1, $type_pair2);
 $stmt->execute();
 $stmt->bind_result($new_match);
 $stmt->fetch();
@@ -105,11 +105,11 @@ $stmt->bind_result($ready_for_match);
 $stmt->fetch();
 $stmt->close();
 
-if (!($new_match > 0) || $ready_for_match > 0) {;}
+if ($new_match == NULL || $ready_for_match > 0) { ;}
 else {
   $stmt = $con->prepare('
-      INSERT INTO creates (accountd_id1, account_id2) VALUES (?, ?)');
-  $stmt->bind_params('ii', $id, $new_match);
+      INSERT INTO creates (account_id1, account_id2) VALUES (?, ?)');
+  $stmt->bind_param('ii', $id, $new_match);
   $stmt->execute();
   $stmt->close();
 }
@@ -149,6 +149,7 @@ if ($match1 == $id || $match2 == $id){
   $stmt->fetch();
   $stmt->close();
 }
+else if ($new_match == NULL) {$m_name = "Waiting for match...";}
 else {$m_name = "Take quiz to generate new match!";}
 
 ?>
