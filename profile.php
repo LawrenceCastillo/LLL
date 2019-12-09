@@ -11,7 +11,7 @@ require_once "config.php";
 
 // Return main profile data, including type=null if quiz not submitted
 $stmt = $con->prepare('
-    SELECT auth.email, det.phone_number, det.zipcode, det.looking_for, t.type, min(pairings.type_id2) type_pair1, max(pairings.type_id2) type_pair2
+    SELECT auth.email, det.phone_number, det.zipcode, det.gender, det.looking_for, t.type, min(pairings.type_id2) type_pair1, max(pairings.type_id2) type_pair2
     FROM accounts auth
     JOIN
       accounts_details det ON auth.account_id=det.account_id
@@ -30,7 +30,7 @@ WHERE auth.account_id = ?');
 
 $stmt->bind_param('ii', $_SESSION['id'], $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($email, $phone_number, $zipcode, $looking_for, $type, $type_pair1, $type_pair2);
+$stmt->bind_result($email, $phone_number, $zipcode, $gender,$looking_for, $type, $type_pair1, $type_pair2);
 $stmt->fetch();
 $stmt->close();
 
@@ -52,7 +52,11 @@ $stmt->close();
 
 
 // Return unique match 
-$stmt = $con->prepare('SELECT account_id1, account_id2 FROM creates WHERE account_id1= ? OR account_id2= ?');
+$stmt = $con->prepare('
+    SELECT account_id1, account_id2 
+    FROM creates 
+    WHERE (account_id1= ? OR account_id2= ?)
+    AND paired >= now() + INTERVAL 1 DAY');
 $stmt->bind_param('ii', $_SESSION['id'], $_SESSION['id']);
 $stmt->execute();
 $stmt->bind_result($match1, $match2);
@@ -117,9 +121,13 @@ $stmt->close();
 	  <tr>
             <td>Zipcode:</td>
             <td><?=$zipcode?></td>
+	  </tr>
+	  <tr>
+            <td>I am a:</td>
+            <td><?=$gender?></td>
           </tr>
           <tr>
-            <td>Looking For:</td>
+            <td>Looking for a:</td>
             <td><?=$looking_for?></td>
 	  </tr>
         </table>
