@@ -25,3 +25,7 @@ invited to make contact with that person within 24 hours; once the
 time has elapsed, the match disappears-- 2 key points to this app
 are that: 1) user profiles are not public, and only accessible if a 
 match is created; and 2) only one match may be created at a time.
+
+DESIGN DOCUMENTATION:
+
+<img src="https://github.com/LawrenceCastillo/LLL/blob/master/docs/Database_Schema.jpg" height="600">
