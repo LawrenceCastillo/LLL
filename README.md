@@ -1,10 +1,10 @@
 
 <img src="https://github.com/LawrenceCastillo/LLL/blob/master/images/likelikelove-logo.png" height="84">
 
-matchmaking application
+### matchmaking application<br>
 (for educational purposes only, and therefore not for use as a genuine dating site)
 
-DESCRIPTION:
+#### DESCRIPTION:
 
 The app proposes to set individuals up on blind dates; no pictures 
 are to be exchanged (and in some cases, real names may be omitted)
@@ -20,7 +20,8 @@ match is created; and 2) only one match may be created at a time.
 and port forwarding, I deployed it over the web for a brief period 
 of time.]
 
-TECH STACK (LAMP)<br>
+#### TECH STACK: (LAMP)<br>
+
 CSS<br>
 HTML<br>
 PHP<br>
@@ -30,7 +31,7 @@ Apache<br>
 Raspbian<br>
 Raspberry Pi<br>
 
-DESIGN DOCUMENTATION:
+#### DESIGN DOCUMENTATION:
 
 <img src="https://github.com/LawrenceCastillo/LLL/blob/master/docs/Database_Schema.jpg" height="600">
 
