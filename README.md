@@ -1,4 +1,6 @@
-# LLL
+
+<img src="https://github.com/LawrenceCastillo/LLL/blob/master/images/likelikelove-logo.png" height="84">
+
 matchmaking application
 (for educational purposes)
 
