@@ -6,9 +6,9 @@
 
 #### DESCRIPTION:
 
-The app proposes to set individuals up on blind dates; no pictures 
-are to be exchanged (and in some cases, real names may be omitted)
-while the matching algorithm deployed is borrowed from Gretchen Rubin's book
+The app proposes to set individuals up on blind dates. No pictures 
+are to be exchanged and, in some cases, real names may be omitted.
+The matching algorithm deployed is borrowed from Gretchen Rubin's book
 "The Four Tendencies." After users answer a brief quiz, their type 
 is derived and a match is automatically generated. They are then 
 invited to make contact with that person within 24 hours; once the
